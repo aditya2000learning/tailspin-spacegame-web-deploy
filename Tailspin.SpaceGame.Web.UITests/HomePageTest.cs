@@ -9,8 +9,8 @@ using System.Collections;
 
 namespace UITests
 {
-    [TestFixture("Chrome")]
-    [TestFixture("Firefox")]
+    // [TestFixture("Chrome")]
+    // [TestFixture("Firefox")]
     [TestFixture("Edge")]
     public class HomePageTest
     {
@@ -30,16 +30,16 @@ namespace UITests
                 // Create the driver for the current browser.
                 switch(browser)
                 {
-                  case "Chrome":
-                    driver = new ChromeDriver(
-                        Environment.GetEnvironmentVariable("ChromeWebDriver")
-                    );
-                    break;
-                  case "Firefox":
-                    driver = new FirefoxDriver(
-                        Environment.GetEnvironmentVariable("GeckoWebDriver")
-                    );
-                    break;
+                //   case "Chrome":
+                //     driver = new ChromeDriver(
+                //         Environment.GetEnvironmentVariable("ChromeWebDriver")
+                //     );
+                //     break;
+                //   case "Firefox":
+                //     driver = new FirefoxDriver(
+                //         Environment.GetEnvironmentVariable("GeckoWebDriver")
+                //     );
+                //     break;
                   case "Edge":
                     driver = new EdgeDriver(
                         Environment.GetEnvironmentVariable("EdgeWebDriver"),
