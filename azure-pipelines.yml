@@ -71,6 +71,7 @@ stages:
 - stage: 'Deploy'
   displayName: 'Deploy to the dev environment'
   dependsOn: Build
+  condition: succeeded()
   jobs:
   - deployment: Deploy
     pool:
@@ -115,6 +116,7 @@ stages:
 
   - job: RunUITests
     dependsOn: Deploy
+    condition: succeeded()
     displayName: 'Run UI tests'
     pool:
       vmImage: 'windows-2019'
@@ -141,7 +143,8 @@ stages:
   
   - job: RunLoadTests
     dependsOn: Deploy
-    displayName: 'Run load tests'
+    condition: succeeded()
+    displayName: 'Run Load tests - JMeter'
     pool:
       vmImage: 'ubuntu-latest'
     variables:
