@@ -84,13 +84,34 @@ stages:
           steps:
           - download: current
             artifact: drop
-          - task: AzureWebApp@1
-            displayName: 'Azure App Service Deploy: website'
+          
+          - task: AzureRmWebAppDeployment@4
+            displayName: 'Deploy to Preview App Service'
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'azure-sc'
+              appType: 'webApp'
+              WebAppName: '$(WebAppName)'
+              deployToSlotOrASE: true
+              ResourceGroupName: '1-00099c3d-playground-sandbox'
+              SlotName: 'preview'
+              packageForLinux: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
+
+          - task: AzureAppServiceManage@0
+            displayName: 'Swap with Production Slot'
             inputs:
               azureSubscription: 'azure-sc'
-              appType: 'webAppLinux'
-              appName: '$(WebAppName)'
-              package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
+              Action: 'Swap Slots'
+              WebAppName: '$(WebAppName)'
+              ResourceGroupName: '1-00099c3d-playground-sandbox'
+              SourceSlot: 'preview'
+          # - task: AzureWebApp@1
+          #   displayName: 'Azure App Service Deploy: website'
+          #   inputs:
+          #     azureSubscription: 'azure-sc'
+          #     appType: 'webAppLinux'
+          #     appName: '$(WebAppName)'
+          #     package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
 
   - job: RunUITests
     dependsOn: Deploy

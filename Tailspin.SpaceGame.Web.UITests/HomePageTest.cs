@@ -35,11 +35,11 @@ namespace UITests
                 //         Environment.GetEnvironmentVariable("ChromeWebDriver")
                 //     );
                 //     break;
-                  case "Firefox":
-                    driver = new FirefoxDriver(
-                        Environment.GetEnvironmentVariable("GeckoWebDriver")
-                    );
-                    break;
+                //   case "Firefox":
+                //     driver = new FirefoxDriver(
+                //         Environment.GetEnvironmentVariable("GeckoWebDriver")
+                //     );
+                //     break;
                   case "Edge":
                     driver = new EdgeDriver(
                         Environment.GetEnvironmentVariable("EdgeWebDriver"),
